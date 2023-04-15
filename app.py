@@ -41,6 +41,13 @@ def create_record():
     city =  data.get('city')
     temp = data.get('temperature')
     cursor = mydb.cursor()
+    cursor.execute("SELECT * FROM record WHERE city = %s", (city,))
+    record = cursor.fetchone()
+    cursor.close()
+    if record:
+     return jsonify({"message": "record already present,you may update!"})   
+    else:
+    cursor = mydb.cursor()
     cursor.execute("INSERT INTO record (city, temperature) VALUES (%s, %s)", (city, temp))
     mydb.commit()
     cursor.close()
@@ -71,6 +78,7 @@ def delete_record(city):
     record = cursor.fetchone()
     cursor.close()
     if record:
+        cursor = mydb.cursor()
         cursor.execute("DELETE FROM record WHERE city = %s", (city,))
         mydb.commit()
         cursor.close()
