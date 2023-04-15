@@ -63,6 +63,7 @@ def update_record(city):
     record = cursor.fetchone()
     cursor.close()
     if record:
+        cursor = mydb.cursor()
         cursor.execute("UPDATE record SET temperature = %s WHERE city = %s", (temp, city))
         mydb.commit()
         cursor.close()
