@@ -32,7 +32,7 @@ def get_record(city):
     if record:
         return jsonify(record)
     else:
-        return jsonify({"error": "User not found"}), 404
+        return jsonify({"error": "Record not found"}), 404
 
 # Endpoint to create a new record
 @app.route('/records', methods=['POST'])
@@ -41,7 +41,7 @@ def create_record():
     city =  data.get('city')
     temp = data.get('temperature')
     cursor = mydb.cursor()
-    cursor.execute("INSERT INTO records (city, temperature) VALUES (%s, %s)", (city, temp))
+    cursor.execute("INSERT INTO record (city, temperature) VALUES (%s, %s)", (city, temp))
     mydb.commit()
     cursor.close()
     return jsonify({"message": "record created successfully"}), 201
