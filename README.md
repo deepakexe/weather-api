@@ -1,7 +1,7 @@
 # weather-api
 weather api for nikola charging assessment
 # operations 
-- create record
+- create record 
 - update record
 - delete record
 - get all records
